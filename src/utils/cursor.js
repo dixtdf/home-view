@@ -7,7 +7,8 @@ const getStyle = (el, attr) => {
         return window.getComputedStyle ?
             window.getComputedStyle(el)[attr] :
             el.currentStyle[attr];
-    } catch (e) {}
+    } catch (e) {
+    }
     return "";
 };
 

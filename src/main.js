@@ -1,12 +1,8 @@
-import {
-    createApp
-} from 'vue';
+import {createApp} from 'vue';
 import '@/style/style.scss';
 import App from '@/App.vue';
 // 引入 pinia
-import {
-    createPinia
-} from 'pinia';
+import {createPinia} from 'pinia';
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate';
 
 const app = createApp(App);

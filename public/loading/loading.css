@@ -19,7 +19,7 @@
     right: 0;
 }
 
-#loading-box>.spinner-box {
+#loading-box > .spinner-box {
     position: fixed;
     z-index: 999999;
     display: flex;

@@ -1,133 +1,136 @@
 <template>
-  <div class="setting">
-    <el-collapse class="collapse" v-model="activeName" accordion>
-      <el-collapse-item title="壁纸设置" name="1">
-        <div class="bg-set">
-          <el-radio-group v-model="bgSet" text-color="#ffffff">
-            <el-radio label="0" size="large" border>默认壁纸</el-radio>
-            <el-radio label="1" size="large" border>每日一图</el-radio>
-            <el-radio label="2" size="large" border>随机风景</el-radio>
-            <el-radio label="3" size="large" border>随机动漫</el-radio>
-          </el-radio-group>
-        </div>
-      </el-collapse-item>
-      <el-collapse-item title="其他设置" name="2">
-        <div class="item">
-          <span class="text">建站日期显示</span>
-          <el-switch
-            v-model="siteStartShow"
-            inline-prompt
-            :active-icon="CheckSmall"
-            :inactive-icon="CloseSmall"
-          />
-        </div>
-      </el-collapse-item>
-      <el-collapse-item title="其他设置" name="3">
-        <div>设置内容待增加</div>
-      </el-collapse-item>
-      <el-collapse-item title="其他设置" name="4">
-        <div>设置内容待增加</div>
-      </el-collapse-item>
-    </el-collapse>
-  </div>
+    <div class="setting">
+        <el-collapse v-model="activeName" accordion class="collapse">
+            <el-collapse-item name="1" title="壁纸设置">
+                <div class="bg-set">
+                    <el-radio-group v-model="bgSet" text-color="#ffffff">
+                        <el-radio border label="0" size="large">默认壁纸</el-radio>
+                        <el-radio border label="1" size="large">每日一图</el-radio>
+                        <el-radio border label="2" size="large">随机风景</el-radio>
+                        <el-radio border label="3" size="large">随机动漫</el-radio>
+                    </el-radio-group>
+                </div>
+            </el-collapse-item>
+            <el-collapse-item name="2" title="其他设置">
+                <div class="item">
+                    <span class="text">建站日期显示</span>
+                    <el-switch
+                        v-model="siteStartShow"
+                        :active-icon="CheckSmall"
+                        :inactive-icon="CloseSmall"
+                        inline-prompt
+                    />
+                </div>
+            </el-collapse-item>
+            <el-collapse-item name="3" title="其他设置">
+                <div>设置内容待增加</div>
+            </el-collapse-item>
+            <el-collapse-item name="4" title="其他设置">
+                <div>设置内容待增加</div>
+            </el-collapse-item>
+        </el-collapse>
+    </div>
 </template>
 
 <script setup>
-import { ref, onMounted, watch } from "vue";
-import { mainStore } from "@/store";
-import { CheckSmall, CloseSmall } from "@icon-park/vue-next";
-import { storeToRefs } from "pinia";
+import {onMounted, ref, watch} from "vue";
+import {mainStore} from "@/store";
+import {CheckSmall, CloseSmall} from "@icon-park/vue-next";
+import {storeToRefs} from "pinia";
 
 const store = mainStore();
-const { siteStartShow } = storeToRefs(store);
+const {siteStartShow} = storeToRefs(store);
 
 // 默认选中项
 let activeName = ref("1");
 let bgSet = ref("0");
 
 onMounted(() => {
-  bgSet.value = store.coverType.toString();
+    bgSet.value = store.coverType.toString();
 });
 
 // 壁纸选中项
 watch(
-  () => bgSet.value,
-  (value) => {
-    store.coverType = value;
-  }
+    () => bgSet.value,
+    (value) => {
+        store.coverType = value;
+    }
 );
 </script>
 
 <style lang="scss" scoped>
 .setting {
-  .collapse {
-    border-radius: 8px;
-    --el-collapse-content-bg-color: #ffffff10;
-    border-color: transparent;
-    overflow: hidden;
+    .collapse {
+        border-radius: 8px;
+        --el-collapse-content-bg-color: #ffffff10;
+        border-color: transparent;
+        overflow: hidden;
 
-    :deep(.el-collapse-item__header) {
-      background-color: #ffffff30;
-      color: #fff;
-      font-size: 15px;
-      padding-left: 18px;
-      border-color: transparent;
-    }
-
-    :deep(.el-collapse-item__wrap) {
-      border-color: transparent;
-
-      .el-collapse-item__content {
-        padding: 20px;
-        .item {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          font-size: 14px;
-          .el-switch__core {
-            border-color: transparent;
+        :deep(.el-collapse-item__header) {
             background-color: #ffffff30;
-          }
+            color: #fff;
+            font-size: 15px;
+            padding-left: 18px;
+            border-color: transparent;
         }
-        .bg-set {
-          .el-radio-group {
-            justify-content: space-between;
 
-            .el-radio {
-              margin: 10px 16px;
-              background: #ffffff26;
-              border: 2px solid transparent;
-              border-radius: 8px;
+        :deep(.el-collapse-item__wrap) {
+            border-color: transparent;
 
-              .el-radio__label {
-                color: #fff;
-              }
+            .el-collapse-item__content {
+                padding: 20px;
 
-              .el-radio__inner {
-                background: #ffffff06 !important;
-                border: 2px solid #eeeeee !important;
-              }
+                .item {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    font-size: 14px;
 
-              &.is-checked {
-                background: #ffffff06 !important;
-                border: 2px solid #eeeeee !important;
-              }
-
-              .is-checked {
-                .el-radio__inner {
-                  background-color: #ffffff30 !important;
-                  border-color: #fff !important;
+                    .el-switch__core {
+                        border-color: transparent;
+                        background-color: #ffffff30;
+                    }
                 }
 
-                & + .el-radio__label {
-                  color: #fff !important;
+                .bg-set {
+                    .el-radio-group {
+                        justify-content: space-between;
+
+                        .el-radio {
+                            margin: 10px 16px;
+                            background: #ffffff26;
+                            border: 2px solid transparent;
+                            border-radius: 8px;
+
+                            .el-radio__label {
+                                color: #fff;
+                            }
+
+                            .el-radio__inner {
+                                background: #ffffff06 !important;
+                                border: 2px solid #eeeeee !important;
+                            }
+
+                            &.is-checked {
+                                background: #ffffff06 !important;
+                                border: 2px solid #eeeeee !important;
+                            }
+
+                            .is-checked {
+                                .el-radio__inner {
+                                    background-color: #ffffff30 !important;
+                                    border-color: #fff !important;
+                                }
+
+                                & + .el-radio__label {
+                                    color: #fff !important;
+                                }
+                            }
+                        }
+                    }
                 }
-              }
             }
-          }
         }
-      }
     }
-  }
 }
 </style>
